@@ -112,6 +112,7 @@ public class ElectronicsListFragment extends Fragment {
         db = FirebaseServices.getInstance();
         productArrayList = new ArrayList<Product>();
 
+
         myAdapter = new MyAdapter(ElectronicsListFragment.this.productArrayList);
 
 
