@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LogInSignUp</string>
+    <string-array name="category_name">
+        <item>Clothes</item>
+        <item>Animals</item>
+        <item>Furniture</item>
+        <item>Accessories</item>
+        <item>electronics</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

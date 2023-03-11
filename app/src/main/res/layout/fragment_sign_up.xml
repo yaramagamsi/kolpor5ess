@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etEmailSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="64dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/etPasswordSignup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/etPasswordSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="296dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@+id/etEmailSignup"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etConfirmPasswordSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@+id/etPasswordSignup"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordSignup" />
+
+        <Button
+            android:id="@+id/btnSignupSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="97dp"
+            android:text="sign up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etConfirmPasswordSignup" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
