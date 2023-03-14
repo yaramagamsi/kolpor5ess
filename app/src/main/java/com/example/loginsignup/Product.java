@@ -7,18 +7,20 @@ public class Product {
     private String name;
     private int price;
     private String owner;
-    private ImageView photo;
+    private String photo;
 
-    public Product(String category, String name, String price, String owner, String photo)
-    {    }
-
-    public Product(String category, String name, int price, String owner, ImageView photo)
+    public Product(String category, String name, int price, String owner, String photo)
     {
         this.category = category;
         this.name = name;
         this.price = price;
         this.owner = owner;
         this.photo = photo;
+    }
+
+    public Product()
+    {
+
     }
 
     public String getCategory()   {    return category;    }
@@ -44,9 +46,9 @@ public class Product {
         this.owner = owner;
     }
 
-    public ImageView getPhoto()   {  return photo;  }
+    public String getPhoto()   {  return photo;  }
 
-    public void setPhoto(ImageView photo)
+    public void setPhoto(String photo)
     {
         this.photo = photo;
     }

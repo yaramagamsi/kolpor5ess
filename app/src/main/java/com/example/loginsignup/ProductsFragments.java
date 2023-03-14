@@ -48,6 +48,7 @@ public class ProductsFragments extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private String imgLocation = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -115,52 +116,60 @@ public class ProductsFragments extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String name = etName.getText().toString();
                 String price = etPrice.getText().toString();
-                Integer.valueOf(price);
                 String category = spnCategory.getSelectedItem().toString();
+                if (name.trim().isEmpty() || price.trim().isEmpty() || category.trim().isEmpty()/*check the */) {
+                    Toast.makeText(getActivity(), "Some fields are empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int priceValue = Integer.valueOf(price);
 
                 // (String category, String name, int price, String owner, String photo)
-                Product p = new Product(category, name, price, "", "");
-                //Map<String, Product> products= new HashMap<>();
-
-                public void addProduct(Product p){
-                    fbs.getFire().collection("Products")
-                            .add(p)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-
-                                    Log.d(TAG, "DocumentSnapshot added with ID:" + documentReference.getId());
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.v(TAG, "Error adding document", e);
-
-                                }
-                            });
+                Product p;
+                if (imgLocation == null)
+                    p = new Product(category, name, priceValue, "", "");
+                else
+                    p = new Product(category, name, priceValue, "", imgLocation);
+                addProduct(p);
                 }
-                ;
-            }
 
+            });
 
-            private void startIntentSenderForResult(int requestCode, int resultCode, Intent data) {
-                // super.onActivityResult(requestCode, resultCode, data);
-                if (requestCode == RESULT_OK && data != null) {
-                    Uri selectedImage = data.getData();
-                    ivPhoto.setImageURI(selectedImage);
-                }
-            }
+    }
 
-            public void gotoLoginFragment() {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new LogInFragment());
-                ft.commit();
-            }
-        });
+    public void addProduct(Product p) {
+        fbs.getFire().collection("Products")
+                .add(p)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+
+                        Log.d(TAG, "DocumentSnapshot added with ID:" + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.v(TAG, "Error adding document", e);
+
+                    }
+                });
+    }
+
+    private void startIntentSenderForResult(int requestCode, int resultCode, Intent data) {
+        // super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            ivPhoto.setImageURI(selectedImage);
+            // TODO: upload image and save location string
+        }
+    }
+
+    public void gotoLoginFragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new LogInFragment());
+        ft.commit();
     }
 }

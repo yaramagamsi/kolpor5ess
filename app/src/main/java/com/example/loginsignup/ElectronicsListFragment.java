@@ -100,11 +100,8 @@ public class ElectronicsListFragment extends Fragment {
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
 
-
-
         recyclerView = getView().findViewById(R.id.rvElectronicsList);
         recyclerView.setHasFixedSize(true);
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
@@ -112,10 +109,10 @@ public class ElectronicsListFragment extends Fragment {
         db = FirebaseServices.getInstance();
         productArrayList = new ArrayList<Product>();
 
+        // TODO: fill the array list
+        EventChangeListener();
 
-        myAdapter = new MyAdapter(ElectronicsListFragment.this.productArrayList);
-
-
+        myAdapter = new MyAdapter(getActivity(), productArrayList);
         recyclerView.setAdapter(myAdapter);
 
         EventChangeListener();
@@ -157,9 +154,6 @@ public class ElectronicsListFragment extends Fragment {
 
                     }
                 });
-
-
-
 
     }
 }
