@@ -31,7 +31,7 @@ public class LogInFragment extends Fragment {
     private EditText etUsername , etPassword;
     private Button btnLogin;
     private FirebaseServices fbs;
-    private TextView tvForgotPass;
+    private TextView tvForgotPass, tvSignUp;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,6 +90,15 @@ public class LogInFragment extends Fragment {
 
         etUsername = getView().findViewById(R.id.etUsernameLogin);
         etPassword = getView().findViewById(R.id.etPasswordLogin);
+        tvSignUp = getView().findViewById(R.id.tvSignUpLogin);
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new SignUpFragment());
+                ft.commit();
+            }
+        });
         tvForgotPass = getView().findViewById(R.id.tvForgotPasswordLogin);
         tvForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +129,7 @@ public class LogInFragment extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                    ft.replace(R.id.FrameLayoutMain, new ProductsFragments());
+                                    ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
                                     ft.commit();
                                 } else {
                                     Toast.makeText(getActivity(),"Incorrect Username or Password!",Toast.LENGTH_SHORT).show();

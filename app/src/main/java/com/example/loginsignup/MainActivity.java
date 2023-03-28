@@ -10,8 +10,8 @@ import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnsignup,btnlogin;
-    //private FrameLayout framelay;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,17 +19,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         connectComponents();
+        LoginFragment();
     }
 
     private void connectComponents() {
 
-        btnsignup = findViewById(R.id.btnSignupMain);
-        btnlogin = findViewById(R.id.btnLoginMain);
-        //framelay = findViewById(R.id.FrameLayoutMain);
+
     }
 
 
-    public void LoginFragment(View view) {
+    public void LoginFragment() {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new LogInFragment());

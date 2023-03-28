@@ -15,7 +15,7 @@
             android:id="@+id/etUsernameLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="243dp"
+            android:layout_marginTop="140dp"
             android:ems="10"
             android:hint="Username"
             android:inputType="textEmailAddress"
@@ -53,6 +53,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnLoginLogin" />
+
+        <TextView
+            android:id="@+id/tvSignUpLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="39dp"
+            android:text="Sign Up"
+            app:layout_constraintStart_toStartOf="@+id/tvForgotPasswordLogin"
+            app:layout_constraintTop_toBottomOf="@+id/tvForgotPasswordLogin" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

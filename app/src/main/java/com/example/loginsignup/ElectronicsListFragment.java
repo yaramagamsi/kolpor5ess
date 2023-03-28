@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,13 +15,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +40,8 @@ public class ElectronicsListFragment extends Fragment {
     MyAdapter myAdapter;
     FirebaseServices db;
     ProgressDialog progressDialog;
+
+    private ProductsCallBack ucall;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -91,69 +99,44 @@ public class ElectronicsListFragment extends Fragment {
 
     private void connectComponents() {
 
-        Context context = getActivity();
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Fetching Data...");
-        progressDialog.show();
-
         recyclerView = getView().findViewById(R.id.rvElectronicsList);
         recyclerView.setHasFixedSize(true);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         db = FirebaseServices.getInstance();
         productArrayList = new ArrayList<Product>();
-
-        // TODO: fill the array list
-        EventChangeListener();
-
-        myAdapter = new MyAdapter(getActivity(), productArrayList);
-        recyclerView.setAdapter(myAdapter);
-
-        EventChangeListener();
-
+        getData();
+        ucall = new ProductsCallBack() {
+            @Override
+            public void onCallback(List<Product> productsList) {
+                myAdapter = new MyAdapter(getActivity(), productArrayList);
+                recyclerView.setAdapter(myAdapter);
+            }
+        };
 
     }
 
-    private void EventChangeListener() {
-
-        db.getFire().collection("Products").orderBy("Item Name", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+    private void getData()
+    {
+        db.getFire().collection("Products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Product product = document.toObject(Product.class);
+                                productArrayList.add(document.toObject(Product.class));
+                            }
 
-                       if (error != null){
+                            ucall.onCallback(productArrayList);
 
-                           if (progressDialog.isShowing())
-                               progressDialog.dismiss();
-
-                           Log.e("Firestore error", error.getMessage());
-                           return;
-                       }
-
-                       for (DocumentChange documentChange : value.getDocumentChanges()){
-
-                           if (documentChange.getType() == DocumentChange.Type.ADDED){
-
-                               productArrayList.add(documentChange.getDocument().toObject(Product.class));
-
-                           }
-
-                           myAdapter.notifyDataSetChanged();
-                           if (progressDialog.isShowing())
-                               progressDialog.dismiss();
-
-
-                       }
-
-
+                        } else {
+                            //Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
+                        }
                     }
                 });
-
     }
 }

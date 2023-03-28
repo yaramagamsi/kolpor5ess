@@ -3,6 +3,7 @@ package com.example.loginsignup;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,9 @@ public class PickCategoryFragment extends Fragment {
         tvElectronics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+                ft.commit();
 
             }
         });

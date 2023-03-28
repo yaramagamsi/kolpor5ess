@@ -78,13 +78,21 @@ public class HomePageFragment extends Fragment {
     private void connectComponents() {
 
         ivAdd = getView().findViewById(R.id.ivAddHomePageFragment);
+        ivAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new ProductsFragments());
+                ft.commit();
+            }
+        });
         ivTake = getView().findViewById(R.id.ivTakeHomePageFragment);
 
         ivTake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutHomePage, new PickCategoryFragment());
+                ft.replace(R.id.FrameLayoutMain, new PickCategoryFragment());
                 ft.commit();
 
             }
