@@ -14,26 +14,36 @@
 
         <ImageView
             android:id="@+id/ivAddHomePageFragment"
-            android:layout_width="196dp"
+            android:layout_width="227dp"
             android:layout_height="0dp"
             android:layout_marginStart="53dp"
-            android:layout_marginTop="113dp"
-            android:layout_marginBottom="96dp"
-            android:src="@drawable/invisible"
+            android:layout_marginTop="69dp"
+            android:layout_marginBottom="84dp"
+            android:src="@drawable/give"
             app:layout_constraintBottom_toTopOf="@+id/ivTakeHomePageFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ivTakeHomePageFragment"
-            android:layout_width="192dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="41dp"
-            android:layout_marginBottom="164dp"
-            android:src="@drawable/invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="110dp"
+            android:src="@drawable/take"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivAddHomePageFragment" />
+
+        <TextView
+            android:id="@+id/tvAddPicHomePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="27dp"
+            android:text="Add"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAddHomePageFragment"
+            app:layout_constraintEnd_toEndOf="@+id/ivAddHomePageFragment"
+            app:layout_constraintStart_toStartOf="@+id/ivAddHomePageFragment" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

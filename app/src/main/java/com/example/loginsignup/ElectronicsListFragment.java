@@ -133,6 +133,7 @@ public class ElectronicsListFragment extends Fragment {
 
                             ucall.onCallback(productArrayList);
 
+
                         } else {
                             //Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
                         }

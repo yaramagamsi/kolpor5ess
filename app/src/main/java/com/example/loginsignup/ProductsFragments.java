@@ -132,6 +132,9 @@ public class ProductsFragments extends Fragment {
                 else
                     p = new Product(category, name, priceValue, "", imgLocation);
                 addProduct(p);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
+                ft.commit();
                 }
 
             });
@@ -146,6 +149,7 @@ public class ProductsFragments extends Fragment {
                     public void onSuccess(DocumentReference documentReference) {
 
                         Log.d(TAG, "DocumentSnapshot added with ID:" + documentReference.getId());
+
 
                     }
                 })

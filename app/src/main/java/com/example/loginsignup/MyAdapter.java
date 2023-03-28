@@ -39,7 +39,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.ItemName.setText(product.getName());
         holder.Price.setText(String.valueOf(product.getPrice()));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -48,7 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView ItemName, Size, Price;
+        TextView ItemName, Price;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

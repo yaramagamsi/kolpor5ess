@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +19,8 @@ import android.widget.ImageView;
 public class HomePageFragment extends Fragment {
 
     private ImageView ivAdd;
+
+    private TextView tvAddPic;
 
     private ImageView ivTake;
 
@@ -77,6 +80,8 @@ public class HomePageFragment extends Fragment {
 
     private void connectComponents() {
 
+
+        tvAddPic = getView().findViewById(R.id.tvAddPicHomePage);
         ivAdd = getView().findViewById(R.id.ivAddHomePageFragment);
         ivAdd.setOnClickListener(new View.OnClickListener() {
             @Override
