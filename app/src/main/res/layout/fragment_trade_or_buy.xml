@@ -13,23 +13,60 @@
         app:layout_constraintStart_toStartOf="@+id/imageView3">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="214dp"
-            android:layout_height="707dp"
-            android:layout_marginStart="205dp"
-            android:src="@drawable/give_and_take"
+            android:id="@+id/ivTrade"
+            android:layout_width="0dp"
+            android:layout_height="729dp"
+            android:layout_marginStart="-14dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="#03A9F4"
+            android:src="@drawable/give_and_take_transformed"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivBuy"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.666" />
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="731dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_begin="204dp" />
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="204dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/buy"
-            tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="0dp" />
+            android:id="@+id/ivBuy"
+            android:layout_width="211dp"
+            android:layout_height="731dp"
+            android:layout_marginEnd="14dp"
+            android:background="#EF7777"
+            android:src="@drawable/buy_removebg_preview10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivTrade"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-128dp"
+            android:layout_marginTop="-488dp"
+            android:layout_marginEnd="88dp"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="14sp"
+            android:text="Trade"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            android:typeface="serif"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivTrade"
+            app:layout_constraintTop_toBottomOf="@+id/ivTrade" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

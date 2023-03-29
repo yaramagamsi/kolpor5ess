@@ -15,10 +15,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Product> productArrayList;
+    ItemClickListener mItemListener;
 
-    public MyAdapter(Context context, ArrayList<Product> productArrayList) {
+    public MyAdapter(Context context, ArrayList<Product> productArrayList, ItemClickListener itemClickListener) {
         this.context = context;
         this.productArrayList = productArrayList;
+        this.mItemListener = itemClickListener;
     }
 
     @NonNull
@@ -39,13 +41,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.ItemName.setText(product.getName());
         holder.Price.setText(String.valueOf(product.getPrice()));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.itemView.setOnClickListener(view -> {
 
-
-            }
-        });
+            mItemListener.onItemClick(productArrayList.get(position));
+        } );
     }
 
 
@@ -53,6 +52,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         return productArrayList.size();
+    }
+
+    public interface ItemClickListener{
+
+        void onItemClick(Product product);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

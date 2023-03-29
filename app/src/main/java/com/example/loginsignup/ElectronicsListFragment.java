@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -111,7 +112,15 @@ public class ElectronicsListFragment extends Fragment {
         ucall = new ProductsCallBack() {
             @Override
             public void onCallback(List<Product> productsList) {
-                myAdapter = new MyAdapter(getActivity(), productArrayList);
+                myAdapter = new MyAdapter(getActivity(), productArrayList, new MyAdapter.ItemClickListener() {
+                    @Override
+                    public void onItemClick(Product product) {
+
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.FrameLayoutMain, new TradeOrBuyFragment());
+                        ft.commit();
+                    }
+                });
                 recyclerView.setAdapter(myAdapter);
             }
         };
