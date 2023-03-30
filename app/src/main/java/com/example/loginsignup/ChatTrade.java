@@ -1,10 +1,11 @@
 package com.example.loginsignup;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,12 @@ import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TradeOrBuyFragment#newInstance} factory method to
+ * Use the {@link ChatTrade#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TradeOrBuyFragment extends Fragment {
+public class ChatTrade extends Fragment {
 
-
-    private ImageView trade, buy;
+    private ImageView ivPickPic;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +29,7 @@ public class TradeOrBuyFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TradeOrBuyFragment() {
+    public ChatTrade() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class TradeOrBuyFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TradeOrBuyFragment.
+     * @return A new instance of fragment ChatTrade.
      */
     // TODO: Rename and change types and number of parameters
-    public static TradeOrBuyFragment newInstance(String param1, String param2) {
-        TradeOrBuyFragment fragment = new TradeOrBuyFragment();
+    public static ChatTrade newInstance(String param1, String param2) {
+        ChatTrade fragment = new ChatTrade();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +64,7 @@ public class TradeOrBuyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trade_or_buy, container, false);
+        return inflater.inflate(R.layout.fragment_chat_trade, container, false);
     }
 
     @Override
@@ -75,28 +75,13 @@ public class TradeOrBuyFragment extends Fragment {
 
     private void connectComponents() {
 
-        trade = getView().findViewById(R.id.ivTrade);
-        trade.setOnClickListener(new View.OnClickListener() {
+        ivPickPic = getView().findViewById(R.id.ivPickPicChatTrade);
+        ivPickPic.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ChatTrade());
-                ft.commit();
-
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 3);
             }
         });
-
-
-        buy = getView().findViewById(R.id.ivBuy);
-        buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-            }
-        });
-
     }
 }

@@ -44,6 +44,8 @@ public class ProductsFragments extends Fragment {
     private Spinner spnCategory;
     private FirebaseServices fbs;
 
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -127,6 +129,7 @@ public class ProductsFragments extends Fragment {
 
                 // (String category, String name, int price, String owner, String photo)
                 Product p;
+
                 if (imgLocation == null)
                     p = new Product(category, name, priceValue, "", "");
                 else
