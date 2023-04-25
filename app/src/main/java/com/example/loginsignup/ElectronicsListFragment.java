@@ -121,7 +121,12 @@ public class ElectronicsListFragment extends Fragment {
                         ft.commit();
                     }
                 });
-                recyclerView.setAdapter(myAdapter);
+
+                if (myAdapter.productArrayList.get(0).getCategory().equals("electronics"))
+                {
+                    recyclerView.setAdapter(myAdapter);
+                }
+
             }
         };
 
