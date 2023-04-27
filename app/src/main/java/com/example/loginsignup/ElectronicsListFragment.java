@@ -38,7 +38,6 @@ public class ElectronicsListFragment extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<Product> productArrayList;
-    ArrayList<Product> categoryArrayList;
     MyAdapter myAdapter;
     FirebaseServices db;
     ProgressDialog progressDialog;
@@ -109,12 +108,11 @@ public class ElectronicsListFragment extends Fragment {
 
         db = FirebaseServices.getInstance();
         productArrayList = new ArrayList<Product>();
-        categoryArrayList = new ArrayList<Product>();
         getData();
         ucall = new ProductsCallBack() {
             @Override
             public void onCallback(List<Product> productsList) {
-                myAdapter = new MyAdapter(getActivity(), categoryArrayList, new MyAdapter.ItemClickListener() {
+                myAdapter = new MyAdapter(getActivity(), productArrayList, new MyAdapter.ItemClickListener() {
                     @Override
                     public void onItemClick(Product product) {
 
@@ -123,8 +121,6 @@ public class ElectronicsListFragment extends Fragment {
                         ft.commit();
                     }
                 });
-
-
                 recyclerView.setAdapter(myAdapter);
             }
         };
@@ -133,8 +129,6 @@ public class ElectronicsListFragment extends Fragment {
 
     private void getData()
     {
-        String category = getActivity().getIntent().getStringExtra("category");
-
         db.getFire().collection("Products")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -146,9 +140,7 @@ public class ElectronicsListFragment extends Fragment {
                                 productArrayList.add(document.toObject(Product.class));
                             }
 
-                            buildCategoryList(category);
-
-                            ucall.onCallback(categoryArrayList);
+                            ucall.onCallback(productArrayList);
 
 
                         } else {
@@ -156,19 +148,5 @@ public class ElectronicsListFragment extends Fragment {
                         }
                     }
                 });
-
     }
-
-
-
-    private void buildCategoryList(String category) {
-        for(Product product : productArrayList) {
-            if (product.getCategory().equals(category)) {
-                categoryArrayList.add(product);
-            }
-        }
-    }
-
-
-
 }
