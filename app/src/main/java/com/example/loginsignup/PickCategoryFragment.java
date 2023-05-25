@@ -119,6 +119,8 @@ public class PickCategoryFragment extends Fragment {
             }
         });
 
+
+
         tvElectronics = getView().findViewById(R.id.tvElectronicsPickCategoryFragment);
         tvElectronics.setOnClickListener(new View.OnClickListener() {
             @Override
