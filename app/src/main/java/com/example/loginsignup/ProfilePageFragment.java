@@ -1,38 +1,29 @@
 package com.example.loginsignup;
 
-import android.app.ProgressDialog;
-import android.media.Image;
+import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfilePage#newInstance} factory method to
+ * Use the {@link ProfilePageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfilePage extends Fragment {
+public class ProfilePageFragment extends Fragment {
 
 
     private TextView posts, chats;
+    private RelativeLayout relativeL, relativeL2;
+    private ImageView pickPic;
 
 
     private ProductsCallBack ucall;
@@ -46,7 +37,7 @@ public class ProfilePage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProfilePage() {
+    public ProfilePageFragment() {
         // Required empty public constructor
     }
 
@@ -59,8 +50,8 @@ public class ProfilePage extends Fragment {
      * @return A new instance of fragment ProfilePage.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfilePage newInstance(String param1, String param2) {
-        ProfilePage fragment = new ProfilePage();
+    public static ProfilePageFragment newInstance(String param1, String param2) {
+        ProfilePageFragment fragment = new ProfilePageFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -88,15 +79,44 @@ public class ProfilePage extends Fragment {
     public void onStart() {
         super.onStart();
         connectComponents();
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FrameLayoutMain, new PickPic());
-        ft.commit();
 
     }
 
     private void connectComponents() {
 
+        relativeL = getView().findViewById(R.id.relativeLayout);
+        relativeL2 = getView().findViewById(R.id.relativeLayout2);
+
+
+
         posts = getView().findViewById(R.id.tvPostsProfile);
+        posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chats.setTextColor(Color.parseColor("#A3A3A3"));
+                posts.setTextColor(Color.parseColor("#B54040"));
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.relativeLayout2, new MyPosts());
+                ft.commit();
+
+            }
+        });
+
+         chats = getView().findViewById(R.id.tvChatsProfile);
+         chats.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+
+                 chats.setTextColor(Color.parseColor("#B54040"));
+                 posts.setTextColor(Color.parseColor("#A3A3A3"));
+
+                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                 ft.replace(R.id.relativeLayout2, new MessagesRecycler());
+                 ft.commit();
+
+             }
+         });
 
     }
 

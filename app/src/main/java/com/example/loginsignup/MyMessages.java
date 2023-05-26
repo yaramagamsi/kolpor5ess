@@ -9,9 +9,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,19 +24,18 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ElectronicsListFragment#newInstance} factory method to
+ * Use the {@link MyMessages#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ElectronicsListFragment extends Fragment {
+public class MyMessages extends Fragment {
 
     RecyclerView recyclerView;
-    ArrayList<Product> productArrayList;
-    MyAdapter myAdapter;
+    ArrayList<Message> messageArrayList;
+    MessageAdapter messageAdapter;
     FirebaseServices db;
     ProgressDialog progressDialog;
 
     private ProductsCallBack ucall;
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +46,7 @@ public class ElectronicsListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ElectronicsListFragment() {
+    public MyMessages() {
         // Required empty public constructor
     }
 
@@ -55,11 +56,11 @@ public class ElectronicsListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ClothesListFragment.
+     * @return A new instance of fragment MyMessages.
      */
     // TODO: Rename and change types and number of parameters
-    public static ElectronicsListFragment newInstance(String param1, String param2) {
-        ElectronicsListFragment fragment = new ElectronicsListFragment();
+    public static MyMessages newInstance(String param1, String param2) {
+        MyMessages fragment = new MyMessages();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,14 +81,13 @@ public class ElectronicsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_electronics_list, container, false);
+        return inflater.inflate(R.layout.fragment_my_messages, container, false);
     }
-
     @Override
     public void onStart() {
         super.onStart();
         connectComponents();
-    }
+}
 
     private void connectComponents() {
 
@@ -98,12 +98,12 @@ public class ElectronicsListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         db = FirebaseServices.getInstance();
-        productArrayList = new ArrayList<Product>();
+        messageArrayList = new ArrayList<Message>();
         getData();
         ucall = new ProductsCallBack() {
             @Override
             public void onCallback(ArrayList<Product> productsList) {
-                myAdapter = new MyAdapter(getActivity(), productArrayList, new MyAdapter.ItemClickListener() {
+                messageAdapter = new MessageAdapter(getActivity(), messageArrayList, new MessageAdapter.ItemClickListener() {
                     @Override
                     public void onItemClick(Product product) {
 
@@ -112,26 +112,24 @@ public class ElectronicsListFragment extends Fragment {
                         ft.commit();
                     }
                 });
-                recyclerView.setAdapter(myAdapter);
+                recyclerView.setAdapter(messageAdapter);
             }
         };
-
     }
-
     private void getData()
     {
-        db.getFire().collection("Products")
+        db.getFire().collection("MyMessages")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Product product = document.toObject(Product.class);
-                                productArrayList.add(document.toObject(Product.class));
+                                Message message = document.toObject(Message.class);
+                                messageArrayList.add(document.toObject(Message.class));
                             }
 
-                            ucall.onCallback(productArrayList);
+                            ucall.onCallback(messageArrayList);
 
 
                         } else {
@@ -140,4 +138,6 @@ public class ElectronicsListFragment extends Fragment {
                     }
                 });
     }
+
+
 }

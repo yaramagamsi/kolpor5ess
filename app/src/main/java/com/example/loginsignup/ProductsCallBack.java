@@ -1,9 +1,9 @@
 package com.example.loginsignup;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public interface ProductsCallBack {
-    public void onCallback(List<Product> productsList);
+    public void onCallback(ArrayList<Product> productsList);
 }
 

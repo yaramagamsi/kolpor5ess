@@ -86,7 +86,7 @@ public class HomePageFragment extends Fragment {
             public void onClick(View view) {
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ProfilePage());
+                ft.replace(R.id.FrameLayoutMain, new ProfilePageFragment());
                 ft.commit();
             }
         });

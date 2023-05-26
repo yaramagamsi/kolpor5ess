@@ -22,10 +22,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ElectronicsListFragment#newInstance} factory method to
+ * Use the {@link MyPosts#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ElectronicsListFragment extends Fragment {
+public class MyPosts extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<Product> productArrayList;
@@ -34,7 +34,6 @@ public class ElectronicsListFragment extends Fragment {
     ProgressDialog progressDialog;
 
     private ProductsCallBack ucall;
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +44,7 @@ public class ElectronicsListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ElectronicsListFragment() {
+    public MyPosts() {
         // Required empty public constructor
     }
 
@@ -55,11 +54,11 @@ public class ElectronicsListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ClothesListFragment.
+     * @return A new instance of fragment MyPosts.
      */
     // TODO: Rename and change types and number of parameters
-    public static ElectronicsListFragment newInstance(String param1, String param2) {
-        ElectronicsListFragment fragment = new ElectronicsListFragment();
+    public static MyPosts newInstance(String param1, String param2) {
+        MyPosts fragment = new MyPosts();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,14 +79,14 @@ public class ElectronicsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_electronics_list, container, false);
+        return inflater.inflate(R.layout.fragment_my_posts, container, false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         connectComponents();
-    }
+}
 
     private void connectComponents() {
 
@@ -115,12 +114,11 @@ public class ElectronicsListFragment extends Fragment {
                 recyclerView.setAdapter(myAdapter);
             }
         };
-
     }
 
     private void getData()
     {
-        db.getFire().collection("Products")
+        db.getFire().collection("MyPosts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -5,12 +5,15 @@
     android:id="@+id/FrameLayoutHomePage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2196F3"
+    android:backgroundTint="#D7A0A0"
     tools:context=".HomePageFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#1CB0F3">
 
         <ImageView
             android:id="@+id/ivAddHomePageFragment"
@@ -18,7 +21,9 @@
             android:layout_height="224dp"
             android:layout_marginStart="53dp"
             android:layout_marginBottom="35dp"
+            android:baselineAlignBottom="false"
             android:src="@drawable/give"
+            app:circularflow_angles="180db"
             app:layout_constraintBottom_toTopOf="@+id/ivTakeHomePageFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +52,7 @@
 
         <ImageView
             android:id="@+id/ivProfileHomePage"
-            android:layout_width="53dp"
+            android:layout_width="60dp"
             android:layout_height="75dp"
             android:layout_marginBottom="2dp"
             android:src="@drawable/profile_icon"

@@ -79,7 +79,7 @@ public class PickPic extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ProductsFragments());
+                ft.replace(R.id.FrameLayoutMain, new AddProductProfilePage());
                 ft.commit();
             }
         });
