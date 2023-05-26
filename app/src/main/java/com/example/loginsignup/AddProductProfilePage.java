@@ -3,22 +3,17 @@ package com.example.loginsignup;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TradeOrBuyFragment#newInstance} factory method to
+ * Use the {@link AddProductProfilePage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TradeOrBuyFragment extends Fragment {
-
-
-    private ImageView trade, buy;
+public class AddProductProfilePage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +24,7 @@ public class TradeOrBuyFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TradeOrBuyFragment() {
+    public AddProductProfilePage() {
         // Required empty public constructor
     }
 
@@ -39,11 +34,11 @@ public class TradeOrBuyFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TradeOrBuyFragment.
+     * @return A new instance of fragment AddProductProfilePage.
      */
     // TODO: Rename and change types and number of parameters
-    public static TradeOrBuyFragment newInstance(String param1, String param2) {
-        TradeOrBuyFragment fragment = new TradeOrBuyFragment();
+    public static AddProductProfilePage newInstance(String param1, String param2) {
+        AddProductProfilePage fragment = new AddProductProfilePage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,41 +59,6 @@ public class TradeOrBuyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trade_or_buy, container, false);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        connectComponents();
-    }
-
-    private void connectComponents() {
-
-        trade = getView().findViewById(R.id.ivTrade);
-        trade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ChatTrade());
-                ft.commit();
-
-            }
-        });
-
-
-        buy = getView().findViewById(R.id.ivBuy);
-        buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ChatBuy());
-                ft.commit();
-
-            }
-        });
-
+        return inflater.inflate(R.layout.fragment_add_product_profile_page, container, false);
     }
 }

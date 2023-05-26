@@ -18,7 +18,7 @@ import android.widget.TextView;
  */
 public class HomePageFragment extends Fragment {
 
-    private ImageView ivAdd;
+    private ImageView ivAdd, profile;
 
     private TextView tvAddPic;
 
@@ -80,6 +80,17 @@ public class HomePageFragment extends Fragment {
 
     private void connectComponents() {
 
+        profile = getView().findViewById(R.id.ivProfileHomePage);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new ProfilePage());
+                ft.commit();
+            }
+        });
+
 
         tvAddPic = getView().findViewById(R.id.tvAddPicHomePage);
         ivAdd = getView().findViewById(R.id.ivAddHomePageFragment);
@@ -97,7 +108,7 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ClickableAreas());
+                ft.replace(R.id.FrameLayoutMain, new PickCategoryFragment());
                 ft.commit();
 
             }

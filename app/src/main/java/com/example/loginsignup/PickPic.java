@@ -1,23 +1,23 @@
 package com.example.loginsignup;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ClickableAreas#newInstance} factory method to
+ * Use the {@link PickPic#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClickableAreas extends Fragment {
+public class PickPic extends Fragment {
+
+    private ImageView pickPic;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ public class ClickableAreas extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ClickableAreas() {
+    public PickPic() {
         // Required empty public constructor
     }
 
@@ -38,11 +38,11 @@ public class ClickableAreas extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ClickableAreas.
+     * @return A new instance of fragment PickPic.
      */
     // TODO: Rename and change types and number of parameters
-    public static ClickableAreas newInstance(String param1, String param2) {
-        ClickableAreas fragment = new ClickableAreas();
+    public static PickPic newInstance(String param1, String param2) {
+        PickPic fragment = new PickPic();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,7 +63,7 @@ public class ClickableAreas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_clickable_areas, container, false);
+        return inflater.inflate(R.layout.fragment_pick_pic, container, false);
     }
 
     @Override
@@ -74,35 +74,14 @@ public class ClickableAreas extends Fragment {
 
     private void connectComponents() {
 
-        ImageView imageView = getView().findViewById(R.id.ivCategoryClickable);
-
-        imageView.setOnTouchListener(new View.OnTouchListener() {
+        pickPic = getView().findViewById(R.id.ivPickPic);
+        pickPic.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                int x = (int) event.getX();
-                int y = (int) event.getY();
-
-                if (action == MotionEvent.ACTION_UP) {
-                    // Handle click event for specific areas
-                    if (isInClickableArea(x, y)) {
-
-                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
-                        ft.commit();
-                        // Do something when the area is clicked
-                        // Example: launch an activity or show a dialog
-                    }
-                }
-                return true;
+            public void onClick(View view) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new ProductsFragments());
+                ft.commit();
             }
         });
-
     }
-    private boolean isInClickableArea(int x, int y) {
-        // Define the coordinates of your clickable areas
-        Rect clickableArea = new Rect(0, 170, 144, 0);
-        return clickableArea.contains(x, y);
-    }
-
 }
