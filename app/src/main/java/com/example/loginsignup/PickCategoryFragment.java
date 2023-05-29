@@ -1,5 +1,6 @@
 package com.example.loginsignup;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -73,64 +74,50 @@ public class PickCategoryFragment extends Fragment {
         connectComponents();
     }
 
+    @SuppressLint("CutPasteId")
     private void connectComponents() {
 
         tvAccessories = getView().findViewById(R.id.tvSportPickCategoryFragment);
-        tvAccessories.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getIntent().putExtra("category", "Accessories");
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
-                ft.commit();
-            }
+        tvAccessories.setOnClickListener(v -> {
+            getActivity().getIntent().putExtra("category", "Accessories");
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.commit();
         });
 
         tvSport = getView().findViewById(R.id.tvSportPickCategoryFragment);
-        tvSport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getIntent().putExtra("category", "Sport");
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
-                ft.commit();
-            }
+        tvSport.setOnClickListener(v -> {
+            getActivity().getIntent().putExtra("category", "Sport");
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.commit();
         });
 
         tvAnimals = getView().findViewById(R.id.tvAnimalsPickCategoryFragment);
-        tvAnimals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getIntent().putExtra("category", "Animals");
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
-                ft.commit();
-            }
+        tvAnimals.setOnClickListener(v -> {
+            getActivity().getIntent().putExtra("category", "Animals");
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.commit();
         });
 
         tvClothes = getView().findViewById(R.id.tvClothesPickCategoryFragment);
-        tvClothes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getIntent().putExtra("category", "Clothes");
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
-                ft.commit();
-            }
+        tvClothes.setOnClickListener(v -> {
+            getActivity().getIntent().putExtra("category", "Clothes");
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.commit();
         });
 
 
 
         tvElectronics = getView().findViewById(R.id.tvElectronicsPickCategoryFragment);
-        tvElectronics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getIntent().putExtra("category", "electronics");
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
-                ft.commit();
+        tvElectronics.setOnClickListener(view -> {
+            getActivity().getIntent().putExtra("category", "electronics");
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.commit();
 
-            }
         });
     }
 }

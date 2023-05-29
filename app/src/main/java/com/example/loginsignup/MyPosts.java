@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +91,7 @@ public class MyPosts extends Fragment {
 
     private void connectComponents() {
 
-        recyclerView = getView().findViewById(R.id.rvMyPosts);
+        recyclerView = getView().findViewById(R.id.rvElectronicsList);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -109,6 +110,11 @@ public class MyPosts extends Fragment {
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.FrameLayoutMain, new TradeOrBuyFragment());
                         ft.commit();
+                    }
+
+                    @Override
+                    public void onItemClick(Message message) {
+
                     }
                 });
                 recyclerView.setAdapter(myAdapter);

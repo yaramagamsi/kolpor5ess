@@ -1,6 +1,7 @@
 package com.example.loginsignup;
 
 import android.content.Context;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public interface ItemClickListener{
 
         void onItemClick(Product product);
+
+        void onItemClick(Message message);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

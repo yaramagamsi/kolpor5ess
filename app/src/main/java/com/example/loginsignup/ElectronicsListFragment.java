@@ -9,10 +9,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.loginsignup.MyAdapter.ItemClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,7 +34,6 @@ public class ElectronicsListFragment extends Fragment {
     MyAdapter myAdapter;
     FirebaseServices db;
     ProgressDialog progressDialog;
-
     private ProductsCallBack ucall;
 
 
@@ -91,7 +92,7 @@ public class ElectronicsListFragment extends Fragment {
 
     private void connectComponents() {
 
-        recyclerView = getView().findViewById(R.id.rvMyPosts);
+        recyclerView = getView().findViewById(R.id.rvElectronicsList);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -103,13 +104,18 @@ public class ElectronicsListFragment extends Fragment {
         ucall = new ProductsCallBack() {
             @Override
             public void onCallback(ArrayList<Product> productsList) {
-                myAdapter = new MyAdapter(getActivity(), productArrayList, new MyAdapter.ItemClickListener() {
+                myAdapter = new MyAdapter(getActivity(), productArrayList, new ItemClickListener() {
                     @Override
                     public void onItemClick(Product product) {
 
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.FrameLayoutMain, new TradeOrBuyFragment());
                         ft.commit();
+                    }
+
+                    @Override
+                    public void onItemClick(Message message) {
+
                     }
                 });
                 recyclerView.setAdapter(myAdapter);

@@ -1,11 +1,13 @@
 package com.example.loginsignup;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +23,9 @@ import android.widget.TextView;
 public class ProfilePageFragment extends Fragment {
 
 
-    private TextView posts, chats;
+    private TextView posts, chats,editPic, profileUsername;
     private RelativeLayout relativeL, relativeL2;
-    private ImageView pickPic;
+    private ImageView profilePic;
 
 
     private ProductsCallBack ucall;
@@ -87,7 +89,18 @@ public class ProfilePageFragment extends Fragment {
         relativeL = getView().findViewById(R.id.relativeLayout);
         relativeL2 = getView().findViewById(R.id.relativeLayout2);
 
+        profileUsername = getView().findViewById(R.id.tvProfileUsername);
 
+
+        profilePic = getView().findViewById(R.id.ivProfilePic);
+        editPic = getView().findViewById(R.id.tvEditPic);
+        editPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 3);
+            }
+        });
 
         posts = getView().findViewById(R.id.tvPostsProfile);
         posts.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +108,7 @@ public class ProfilePageFragment extends Fragment {
             public void onClick(View view) {
                 chats.setTextColor(Color.parseColor("#A3A3A3"));
                 posts.setTextColor(Color.parseColor("#B54040"));
+
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.relativeLayout2, new MyPosts());
@@ -112,7 +126,7 @@ public class ProfilePageFragment extends Fragment {
                  posts.setTextColor(Color.parseColor("#A3A3A3"));
 
                  FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                 ft.replace(R.id.relativeLayout2, new MessagesRecycler());
+                 ft.replace(R.id.relativeLayout2, new MyMessages());
                  ft.commit();
 
              }

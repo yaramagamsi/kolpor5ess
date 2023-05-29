@@ -13,7 +13,6 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +20,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +35,7 @@ public class MyMessages extends Fragment {
     FirebaseServices db;
     ProgressDialog progressDialog;
 
-    private ProductsCallBack ucall;
+    private MessagesCallBack ucall;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,7 +91,7 @@ public class MyMessages extends Fragment {
 
     private void connectComponents() {
 
-        recyclerView = getView().findViewById(R.id.rvMyPosts);
+        recyclerView = getView().findViewById(R.id.rvElectronicsList);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -100,18 +100,25 @@ public class MyMessages extends Fragment {
         db = FirebaseServices.getInstance();
         messageArrayList = new ArrayList<Message>();
         getData();
-        ucall = new ProductsCallBack() {
+        ucall = new MessagesCallBack() {
+
             @Override
-            public void onCallback(ArrayList<Product> productsList) {
+            public void onCallback(List<Message> messageList) {
                 messageAdapter = new MessageAdapter(getActivity(), messageArrayList, new MessageAdapter.ItemClickListener() {
                     @Override
-                    public void onItemClick(Product product) {
+                    public void onItemClick(Message message) {
 
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.FrameLayoutMain, new TradeOrBuyFragment());
                         ft.commit();
                     }
+
+                    @Override
+                    public void onItemClick(Product product) {
+
+                    }
                 });
+
                 recyclerView.setAdapter(messageAdapter);
             }
         };

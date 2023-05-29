@@ -16,10 +16,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
 
     Context context;
     ArrayList<Message> messageArrayList;
+    MessageAdapter.ItemClickListener mItemListener;
 
-    public MessageAdapter(Context context, ArrayList<Message> messageArrayList) {
+    public MessageAdapter(Context context, ArrayList<Message> messageArrayList, MessageAdapter.ItemClickListener itemClickListener) {
         this.context = context;
         this.messageArrayList = messageArrayList;
+        this.mItemListener = itemClickListener;
     }
 
     @NonNull
@@ -39,11 +41,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
         holder.username.setText(message.arg1);
         holder.NewMessage.setText(message.arg2);
 
+        holder.itemView.setOnClickListener(view -> {
+
+            mItemListener.onItemClick(messageArrayList.get(position));
+        } );
+
     }
 
     @Override
     public int getItemCount() {
         return messageArrayList.size();
+    }
+
+    public interface ItemClickListener{
+
+        void onItemClick(Message message);
+
+        void onItemClick(Product product);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
