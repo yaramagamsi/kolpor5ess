@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.storage.StorageReference;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProfilePageFragment#newInstance} factory method to
@@ -26,6 +28,8 @@ public class ProfilePageFragment extends Fragment {
     private TextView posts, chats,editPic, profileUsername;
     private RelativeLayout relativeL, relativeL2;
     private ImageView profilePic;
+
+    private FirebaseServices fbs;
 
 
     private ProductsCallBack ucall;
@@ -90,6 +94,8 @@ public class ProfilePageFragment extends Fragment {
         relativeL2 = getView().findViewById(R.id.relativeLayout2);
 
         profileUsername = getView().findViewById(R.id.tvProfileUsername);
+
+
 
 
         profilePic = getView().findViewById(R.id.ivProfilePic);

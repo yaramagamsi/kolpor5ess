@@ -16,7 +16,7 @@ import android.widget.TextView;
  * Use the {@link PickCategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PickCategoryFragment extends Fragment {
+public class    PickCategoryFragment extends Fragment {
 
 
     private TextView tvElectronics, tvClothes, tvAnimals, tvSport, tvAccessories;

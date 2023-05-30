@@ -134,7 +134,8 @@ public class ElectronicsListFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Product product = document.toObject(Product.class);
-                                productArrayList.add(document.toObject(Product.class));
+                                if (product.getCategory().equals(getActivity().getIntent().getStringExtra("category")))
+                                    productArrayList.add(document.toObject(Product.class));
                             }
 
                             ucall.onCallback(productArrayList);
