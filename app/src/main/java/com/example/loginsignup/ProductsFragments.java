@@ -4,6 +4,8 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -27,9 +29,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import io.grpc.Context;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -172,6 +180,7 @@ public class ProductsFragments extends Fragment {
             Uri selectedImage = data.getData();
             ivPhoto.setImageURI(selectedImage);
             // TODO: upload image and save location string
+            UploadImageToFirebase();
         }
     }
 
@@ -180,4 +189,27 @@ public class ProductsFragments extends Fragment {
         ft.replace(R.id.FrameLayoutMain, new LogInFragment());
         ft.commit();
     }
+
+    private String UploadImageToFirebase() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        StorageReference ref = services.getStorage().getReference("listingPictures/" + UUID.randomUUID().toString());
+        UploadTask uploadTask = ref.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Handle unsuccessful uploads
+            }
+
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+// taskSnapshot. getMetadata () contains file metadata
+            }
+        });
+        return ref.getPath();
+    }
 }
+
+
