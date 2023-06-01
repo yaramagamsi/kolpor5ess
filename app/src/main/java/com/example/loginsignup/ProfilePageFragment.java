@@ -2,8 +2,10 @@ package com.example.loginsignup;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -14,7 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
 
 /**
@@ -30,7 +36,6 @@ public class ProfilePageFragment extends Fragment {
     private ImageView profilePic;
 
     private FirebaseServices fbs;
-
 
     private ProductsCallBack ucall;
 
@@ -95,10 +100,26 @@ public class ProfilePageFragment extends Fragment {
 
         profileUsername = getView().findViewById(R.id.tvProfileUsername);
 
-
-
-
         profilePic = getView().findViewById(R.id.ivProfilePic);
+
+        StorageReference storageRef = fbs.getStorage().getReference();
+        StorageReference pathReference = storageRef.child("images/stars.jpg");
+        storageRef.child("images/stars.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                Glide.with(getActivity())
+                        .load(uri)
+                        .into(profilePic);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
+
         editPic = getView().findViewById(R.id.tvEditPic);
         editPic.setOnClickListener(new View.OnClickListener() {
             @Override

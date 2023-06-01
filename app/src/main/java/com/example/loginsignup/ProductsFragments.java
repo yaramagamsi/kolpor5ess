@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -48,6 +50,7 @@ public class ProductsFragments extends Fragment {
 
     private EditText etName, etPrice;
     private ImageView ivPhoto;
+    private Bitmap image;
     private Button btnAdd;
     private Spinner spnCategory;
     private FirebaseServices fbs;
@@ -174,10 +177,11 @@ public class ProductsFragments extends Fragment {
                 });
     }
 
-    private void startIntentSenderForResult(int requestCode, int resultCode, Intent data) {
-        // super.onActivityResult(requestCode, resultCode, data);
+    private void startIntentSenderForResult(int requestCode, int resultCode, Intent data) throws IOException {
+         //super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
+            image = BitmapFactory.decodeStream(getActivity().getAssets().open(selectedImage.getPath()));
             ivPhoto.setImageURI(selectedImage);
             // TODO: upload image and save location string
             UploadImageToFirebase();
@@ -192,9 +196,9 @@ public class ProductsFragments extends Fragment {
 
     private String UploadImageToFirebase() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
-        StorageReference ref = services.getStorage().getReference("listingPictures/" + UUID.randomUUID().toString());
+        StorageReference ref = fbs.getStorage().getReference("listingPictures/" + UUID.randomUUID().toString());
         UploadTask uploadTask = ref.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
