@@ -10,6 +10,8 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -54,6 +56,7 @@ public class ProductsFragments extends Fragment {
     private Button btnAdd;
     private Spinner spnCategory;
     private FirebaseServices fbs;
+    ActivityResultLauncher<String> mTakePhoto;
 
 
 
@@ -95,6 +98,7 @@ public class ProductsFragments extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -178,7 +182,7 @@ public class ProductsFragments extends Fragment {
     }
 
     private void startIntentSenderForResult(int requestCode, int resultCode, Intent data) throws IOException {
-         //super.onActivityResult(requestCode, resultCode, data);
+         // super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             image = BitmapFactory.decodeStream(getActivity().getAssets().open(selectedImage.getPath()));
@@ -214,6 +218,9 @@ public class ProductsFragments extends Fragment {
         });
         return ref.getPath();
     }
+
+
+
 }
 
 
