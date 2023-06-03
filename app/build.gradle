@@ -26,6 +26,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding true
+    }
     namespace 'com.example.loginsignup'
 }
 
@@ -42,4 +46,12 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Scalable Size Unit ( support for different screen sizes )
+
+    implementation 'com.intut.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    // Rounded imageView
+    implementation 'com.makeramen:roundedimageView:2.3.0'
 }
