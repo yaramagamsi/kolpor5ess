@@ -14,8 +14,8 @@
 
         <EditText
             android:id="@+id/etEmailSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="217dp"
+            android:layout_height="56dp"
             android:layout_marginBottom="64dp"
             android:ems="10"
             android:hint="Email"
@@ -26,8 +26,8 @@
 
         <EditText
             android:id="@+id/etPasswordSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="213dp"
+            android:layout_height="50dp"
             android:layout_marginTop="296dp"
             android:ems="10"
             android:hint="Password"
@@ -37,8 +37,8 @@
 
         <EditText
             android:id="@+id/etConfirmPasswordSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="218dp"
+            android:layout_height="62dp"
             android:layout_marginTop="34dp"
             android:ems="10"
             android:hint="Confirm Password"

@@ -1,6 +1,12 @@
 package com.example.loginsignup;
 
+import static com.example.loginsignup.utilities.Constants.DEFAULT;
+import static java.util.Base64.*;
+
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,9 +25,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.loginsignup.databinding.ActivityMainBinding;
+import com.example.loginsignup.databinding.FragmentProfilePageBinding;
+import com.example.loginsignup.utilities.Constants;
+import com.example.loginsignup.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.Base64;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,10 +46,11 @@ public class ProfilePageFragment extends Fragment {
     private TextView posts, chats,editPic, profileUsername;
     private RelativeLayout relativeL, relativeL2;
     private ImageView profilePic;
-
     private FirebaseServices fbs;
-
     private ProductsCallBack ucall;
+    private FragmentProfilePageBinding binding;
+    private PreferenceManager preferenceManager;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,11 +102,16 @@ public class ProfilePageFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        binding = FragmentProfilePageBinding.inflate(getLayoutInflater());
+        getActivity().setContentView(binding.getRoot());
+        preferenceManager = new PreferenceManager(getContext().getApplicationContext());
+        loadUserDetails();
         connectComponents();
 
     }
 
     private void connectComponents() {
+
 
         relativeL = getView().findViewById(R.id.relativeLayout);
         relativeL2 = getView().findViewById(R.id.relativeLayout2);
@@ -159,6 +177,14 @@ public class ProfilePageFragment extends Fragment {
              }
          });
 
+    }
+
+
+    private void loadUserDetails() {
+        binding.tvProfileUsername.setText(preferenceManager.getString(Constants.KEY_NAME));
+        byte[] bytes = Base64.getDecoder().decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        binding.ivProfilePic.setImageBitmap(bitmap);
     }
 
 

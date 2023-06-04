@@ -12,7 +12,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -49,9 +49,12 @@ dependencies {
 
     // Scalable Size Unit ( support for different screen sizes )
 
-    implementation 'com.intut.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
     // Rounded imageView
-    implementation 'com.makeramen:roundedimageView:2.3.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // MultiDex
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
