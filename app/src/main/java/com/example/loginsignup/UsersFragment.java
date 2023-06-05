@@ -1,24 +1,25 @@
 package com.example.loginsignup;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.loginsignup.databinding.FragmentProfilePageBinding;
-import com.example.loginsignup.databinding.FragmentUsersBinding;
-import com.example.loginsignup.utilities.Constants;
-import com.example.loginsignup.utilities.PreferenceManager;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
-import java.lang.ref.PhantomReference;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,8 +28,12 @@ import java.util.List;
  */
 public class UsersFragment extends Fragment {
 
-    private FragmentUsersBinding binding;
-    private PreferenceManager preferenceManager;
+    RecyclerView recyclerView;
+    ArrayList<com.example.loginsignup.User> userArrayList;
+    UsersAdapter usersAdapter;
+    FirebaseServices db;
+    ProgressDialog progressDialog;
+    private UsersCallBack ucall;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,33 +85,64 @@ public class UsersFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        binding = FragmentUsersBinding.inflate(getLayoutInflater());
-        getActivity().setContentView(binding.getRoot());
-        preferenceManager = new PreferenceManager(getContext().getApplicationContext());
+        connectComponents();
     }
 
-    private void getUsers(){
-        FirebaseFirestore fbs = FirebaseFirestore.getInstance();
-        fbs.collection(Constants.KEY_COLLECTION_USERS)
+    private void connectComponents() {
+
+        recyclerView = getView().findViewById(R.id.usersRecyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        db = FirebaseServices.getInstance();
+        userArrayList = new ArrayList<com.example.loginsignup.User>();
+        getData();
+        ucall = new UsersCallBack() {
+            @Override
+            public void onCallback(ArrayList<com.example.loginsignup.User> usersList) {
+                usersAdapter = new UsersAdapter(userArrayList, new UsersAdapter.ItemClickListener() {
+
+                    @Override
+                    public void onItemClickUser(com.example.loginsignup.User user) {
+
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.FrameLayoutMain, new ChatBuy());
+                        ft.commit();
+                    }
+
+                    @Override
+                    public void onItemClick(User user) {
+
+                    }
+
+                });
+                recyclerView.setAdapter(usersAdapter);
+            }
+        };
+
+            }
+
+
+    private void getData()
+    {
+        db.getFire().collection("Users")
                 .get()
-                .addOnCompleteListener(task -> {
-                    String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        List<User> users = new ArrayList<>();
-                        for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                            if (currentUserId.equals(queryDocumentSnapshot.getId())){
-                                continue;
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                User user = document.toObject(User.class);
+                                    userArrayList.add(document.toObject(com.example.loginsignup.User.class));
                             }
-                            User user = new User();
-                            user.name =queryDocumentSnapshot.getString(Constants.KEY_NAME);
-                            user.email = queryDocumentSnapshot.getString(Constants.KEY_EMAIL);
-                            user.image = queryDocumentSnapshot.getString(Constants.KEY_IMAGE);
-                            users.add(user);
-                        }
-                        if (users.size()>0){
-                            UsersAdapter usersAdapter = new UserAdapter(users);
-                            binding.usersRecyclerView.setAdapter(usersAdapter);
-                            binding.usersRecyclerView.setVisibility(View.VISIBLE);
+
+                            ucall.onCallback(userArrayList);
+
+
+                        } else {
+                            //Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
                         }
                     }
                 });

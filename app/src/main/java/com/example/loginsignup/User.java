@@ -1,3 +1,5 @@
+package com.example.loginsignup;
+
 public class User {
     private String id;
     private String name;
@@ -69,7 +71,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "com.example.loginsignup.User{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", username='" + username + '\'' +

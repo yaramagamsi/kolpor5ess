@@ -182,9 +182,9 @@ public class ProfilePageFragment extends Fragment {
 
     private void loadUserDetails() {
         binding.tvProfileUsername.setText(preferenceManager.getString(Constants.KEY_NAME));
-        byte[] bytes = Base64.getDecoder().decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-        binding.ivProfilePic.setImageBitmap(bitmap);
+   //     byte[] bytes = Base64.getDecoder().decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+   //     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+    //   binding.ivProfilePic.setImageBitmap(bitmap);
     }
 
 

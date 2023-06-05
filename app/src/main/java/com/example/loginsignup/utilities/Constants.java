@@ -10,4 +10,5 @@ public class Constants {
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_IMAGE = "image";
     public static final int DEFAULT = 0;
+    public static final String KEY_USER = "user";
 }

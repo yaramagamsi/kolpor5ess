@@ -8,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.loginsignup.databinding.FragmentChatBuyBinding;
+import com.example.loginsignup.utilities.Constants;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ChatBuy#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ChatBuy extends Fragment {
+
+    private FragmentChatBuyBinding binding;
+    private User receiverUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +66,23 @@ public class ChatBuy extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat_buy, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        binding =FragmentChatBuyBinding.inflate(getLayoutInflater());
+        getActivity().setContentView(binding.getRoot());
+        setListener();
+        loadReceiverDetails();
+    }
+
+    private void loadReceiverDetails() {
+        receiverUser = (User) getActivity().getIntent().getSerializableExtra(Constants.KEY_USER);
+        binding.textName.setText(receiverUser.getName());
+    }
+
+    private void setListener() {
+        binding.imageBack.setOnClickListener(v -> getActivity().onBackPressed());
     }
 }
