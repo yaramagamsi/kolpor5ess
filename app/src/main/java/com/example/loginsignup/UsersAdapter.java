@@ -1,6 +1,8 @@
 package com.example.loginsignup;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,6 +13,7 @@ import com.example.loginsignup.databinding.ItemContainerUserBinding;
 import com.example.loginsignup.listeners.UserListener;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
@@ -75,7 +78,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
    // private Bitmap getUserImage(String encodedImage) {
 
-   //     byte[] bytes = Base64.getDecoder().decode(encodedImage, Base64.DEFAULT);
-  //      return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-   // }
+   //    byte[] bytes = Base64.getDecoder().decode(encodedImage, Base64.DEFAULT);
+   //    return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+  //  }
 }

@@ -13,13 +13,13 @@
         android:layout_height="49dp"
         android:layout_marginStart="19dp"
         android:layout_marginEnd="13dp"
-        android:riv_oval="true"
         app:layout_constraintBottom_toBottomOf="@+id/textName"
         app:layout_constraintEnd_toStartOf="@+id/textEmail"
         app:layout_constraintStart_toEndOf="@+id/viewSupporter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textName"
         app:srcCompat="@drawable/invisible" />
+    <!--android:riv_oval="true"-->
 
     <View
         android:id="@+id/viewSupporter"

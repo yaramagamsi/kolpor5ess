@@ -148,7 +148,7 @@ public class ProductsFragments extends Fragment {
                 if (imgLocation == null)
                     p = new Product(category, name, priceValue, "", "");
                 else
-                    p = new Product(category, name, priceValue, "", imgLocation);
+                    p = new Product(category, name, priceValue, "",  UploadImageToFirebase());
                 addProduct(p);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
@@ -188,7 +188,6 @@ public class ProductsFragments extends Fragment {
             image = BitmapFactory.decodeStream(getActivity().getAssets().open(selectedImage.getPath()));
             ivPhoto.setImageURI(selectedImage);
             // TODO: upload image and save location string
-            UploadImageToFirebase();
         }
     }
 
@@ -202,7 +201,7 @@ public class ProductsFragments extends Fragment {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
-        StorageReference ref = fbs.getStorage().getReference("listingPictures/" + UUID.randomUUID().toString());
+        StorageReference ref = fbs.getStorage().getReference("Pictures" + UUID.randomUUID().toString());
         UploadTask uploadTask = ref.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override

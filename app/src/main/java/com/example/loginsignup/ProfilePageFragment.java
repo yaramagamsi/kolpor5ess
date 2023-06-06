@@ -171,7 +171,7 @@ public class ProfilePageFragment extends Fragment {
                  posts.setTextColor(Color.parseColor("#A3A3A3"));
 
                  FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                 ft.replace(R.id.relativeLayout2, new MyMessages());
+                 ft.replace(R.id.relativeLayout2, new UsersFragment());
                  ft.commit();
 
              }
