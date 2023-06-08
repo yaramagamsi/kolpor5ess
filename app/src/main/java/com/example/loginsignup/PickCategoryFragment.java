@@ -81,7 +81,7 @@ public class    PickCategoryFragment extends Fragment {
         tvAccessories.setOnClickListener(v -> {
             getActivity().getIntent().putExtra("category", "Accessories");
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.replace(R.id.FrameLayoutMain, new ProductsListFragment());
             ft.commit();
         });
 
@@ -89,7 +89,7 @@ public class    PickCategoryFragment extends Fragment {
         tvSport.setOnClickListener(v -> {
             getActivity().getIntent().putExtra("category", "Sport");
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.replace(R.id.FrameLayoutMain, new ProductsListFragment());
             ft.commit();
         });
 
@@ -97,7 +97,7 @@ public class    PickCategoryFragment extends Fragment {
         tvAnimals.setOnClickListener(v -> {
             getActivity().getIntent().putExtra("category", "Animals");
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.replace(R.id.FrameLayoutMain, new ProductsListFragment());
             ft.commit();
         });
 
@@ -105,7 +105,7 @@ public class    PickCategoryFragment extends Fragment {
         tvClothes.setOnClickListener(v -> {
             getActivity().getIntent().putExtra("category", "Clothes");
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.replace(R.id.FrameLayoutMain, new ProductsListFragment());
             ft.commit();
         });
 
@@ -115,7 +115,7 @@ public class    PickCategoryFragment extends Fragment {
         tvElectronics.setOnClickListener(view -> {
             getActivity().getIntent().putExtra("category", "electronics");
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+            ft.replace(R.id.FrameLayoutMain, new ProductsListFragment());
             ft.commit();
 
         });

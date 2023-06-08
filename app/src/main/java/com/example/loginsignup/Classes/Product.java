@@ -1,4 +1,4 @@
-package com.example.loginsignup;
+package com.example.loginsignup.Classes;
 
 import android.widget.ImageView;
 

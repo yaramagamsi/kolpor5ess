@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.loginsignup.Classes.User;
 import com.example.loginsignup.databinding.FragmentChatBuyBinding;
 import com.example.loginsignup.utilities.Constants;
 

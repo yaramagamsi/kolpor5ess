@@ -1,19 +1,15 @@
-package com.example.loginsignup;
+package com.example.loginsignup.Adapters;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.loginsignup.Classes.User;
 import com.example.loginsignup.databinding.ItemContainerUserBinding;
-import com.example.loginsignup.listeners.UserListener;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {

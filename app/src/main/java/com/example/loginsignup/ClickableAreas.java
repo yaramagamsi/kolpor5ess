@@ -88,7 +88,7 @@ public class ClickableAreas extends Fragment {
                     if (isInClickableArea(x, y)) {
 
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.FrameLayoutMain, new ElectronicsListFragment());
+                        ft.replace(R.id.FrameLayoutMain, new ProductsListFragment());
                         ft.commit();
                         // Do something when the area is clicked
                         // Example: launch an activity or show a dialog

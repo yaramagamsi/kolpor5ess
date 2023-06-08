@@ -14,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.loginsignup.MyAdapter.ItemClickListener;
+import com.example.loginsignup.Adapters.MyAdapter;
+import com.example.loginsignup.Adapters.MyAdapter.ItemClickListener;
+import com.example.loginsignup.Classes.Product;
+import com.example.loginsignup.Interface.ProductsCallBack;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -24,10 +27,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ElectronicsListFragment#newInstance} factory method to
+ * Use the {@link ProductsListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ElectronicsListFragment extends Fragment {
+public class ProductsListFragment extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<Product> productArrayList;
@@ -46,7 +49,7 @@ public class ElectronicsListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ElectronicsListFragment() {
+    public ProductsListFragment() {
         // Required empty public constructor
     }
 
@@ -59,8 +62,8 @@ public class ElectronicsListFragment extends Fragment {
      * @return A new instance of fragment ClothesListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ElectronicsListFragment newInstance(String param1, String param2) {
-        ElectronicsListFragment fragment = new ElectronicsListFragment();
+    public static ProductsListFragment newInstance(String param1, String param2) {
+        ProductsListFragment fragment = new ProductsListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,7 +84,7 @@ public class ElectronicsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_electronics_list, container, false);
+        return inflater.inflate(R.layout.fragment_products_list, container, false);
     }
 
     @Override

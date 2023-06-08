@@ -21,9 +21,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ChannelActivity"
-            android:exported="false" />
-        <activity
             android:name=".UserManagementActivity"
             android:exported="false" />
         <activity

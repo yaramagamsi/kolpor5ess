@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.loginsignup.Adapters.UsersAdapter;
+import com.example.loginsignup.Interface.UsersCallBack;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 public class UsersFragment extends Fragment {
 
     RecyclerView recyclerView;
-    ArrayList<com.example.loginsignup.User> userArrayList;
+    ArrayList<com.example.loginsignup.Classes.User> userArrayList;
     UsersAdapter usersAdapter;
     FirebaseServices db;
     ProgressDialog progressDialog;
@@ -97,15 +99,15 @@ public class UsersFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         db = FirebaseServices.getInstance();
-        userArrayList = new ArrayList<com.example.loginsignup.User>();
+        userArrayList = new ArrayList<com.example.loginsignup.Classes.User>();
         getData();
         ucall = new UsersCallBack() {
             @Override
-            public void onCallback(ArrayList<com.example.loginsignup.User> usersList) {
+            public void onCallback(ArrayList<com.example.loginsignup.Classes.User> usersList) {
                 usersAdapter = new UsersAdapter(userArrayList, new UsersAdapter.ItemClickListener() {
 
                     @Override
-                    public void onItemClickUser(com.example.loginsignup.User user) {
+                    public void onItemClickUser(com.example.loginsignup.Classes.User user) {
 
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.FrameLayoutMain, new ChatBuy());
@@ -135,7 +137,7 @@ public class UsersFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 User user = document.toObject(User.class);
-                                    userArrayList.add(document.toObject(com.example.loginsignup.User.class));
+                                    userArrayList.add(document.toObject(com.example.loginsignup.Classes.User.class));
                             }
 
                             ucall.onCallback(userArrayList);

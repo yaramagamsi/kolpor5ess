@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.loginsignup.Data.ProductsFragments;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomePageFragment#newInstance} factory method to
@@ -20,7 +22,7 @@ public class HomePageFragment extends Fragment {
 
     private ImageView ivAdd, profile;
 
-    private TextView tvAddPic;
+    private TextView tvAddPic, profilePage, addProduct, takeProduct;
 
     private ImageView ivTake;
 
@@ -79,6 +81,11 @@ public class HomePageFragment extends Fragment {
     }
 
     private void connectComponents() {
+
+        addProduct = getView().findViewById(R.id.tvAddProduct);
+        takeProduct = getView().findViewById(R.id.tvTakeProduct);
+
+        profilePage = getView().findViewById(R.id.tvProfilePage);
 
         profile = getView().findViewById(R.id.ivProfileHomePage);
         profile.setOnClickListener(new View.OnClickListener() {

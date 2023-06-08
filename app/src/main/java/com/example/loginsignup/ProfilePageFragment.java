@@ -1,12 +1,6 @@
 package com.example.loginsignup;
 
-import static com.example.loginsignup.utilities.Constants.DEFAULT;
-import static java.util.Base64.*;
-
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,18 +16,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.loginsignup.databinding.ActivityMainBinding;
+import com.example.loginsignup.Interface.ProductsCallBack;
 import com.example.loginsignup.databinding.FragmentProfilePageBinding;
 import com.example.loginsignup.utilities.Constants;
 import com.example.loginsignup.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.Base64;
 
 /**
  * A simple {@link Fragment} subclass.

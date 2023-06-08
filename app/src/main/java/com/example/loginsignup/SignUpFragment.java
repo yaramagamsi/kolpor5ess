@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -118,7 +119,10 @@ public class SignUpFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Choose what to do
+                                    addDataToFirebase();
+                                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
+                                    ft.commit();
                                 } else {
                                     Log.e("TAG", task.getException().getMessage());
                                     Toast.makeText(getActivity(),"Incorrect Username or Password!",Toast.LENGTH_SHORT).show();
@@ -128,5 +132,21 @@ public class SignUpFragment extends Fragment {
             }
 
         });
+    }
+
+    private void addDataToFirebase(){
+
+        FirebaseServices fbs = FirebaseServices.getInstance();
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("first_name", "Yara");
+        data.put("last_name", "Magamsi");
+        fbs.getFire().collection("users")
+                .add(data)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(getActivity(), "Data Inserted", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(exception -> {
+                    Toast.makeText(getActivity().getApplicationContext(),exception.getMessage(),Toast.LENGTH_SHORT).show();
+                });
     }
 }

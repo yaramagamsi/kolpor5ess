@@ -1,7 +1,6 @@
-package com.example.loginsignup;
+package com.example.loginsignup.Interface;
 
-import com.example.loginsignup.Product;
-import com.example.loginsignup.User;
+import com.example.loginsignup.Classes.User;
 
 import java.util.ArrayList;
 
