@@ -129,7 +129,7 @@ public class LogInFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    addDataToFirebase();
+
                                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                     ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
                                     ft.commit();

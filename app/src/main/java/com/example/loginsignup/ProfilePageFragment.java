@@ -1,6 +1,8 @@
 package com.example.loginsignup;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,16 +97,16 @@ public class ProfilePageFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        binding = FragmentProfilePageBinding.inflate(getLayoutInflater());
-        getActivity().setContentView(binding.getRoot());
-        preferenceManager = new PreferenceManager(getContext().getApplicationContext());
-        loadUserDetails();
+
         connectComponents();
 
     }
 
     private void connectComponents() {
 
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.relativeLayout2, new MyPosts());
+        ft.commit();
 
         relativeL = getView().findViewById(R.id.relativeLayout);
         relativeL2 = getView().findViewById(R.id.relativeLayout2);
@@ -111,22 +115,7 @@ public class ProfilePageFragment extends Fragment {
 
         profilePic = getView().findViewById(R.id.ivProfilePic);
 
-        StorageReference storageRef = fbs.getStorage().getReference();
-        StorageReference pathReference = storageRef.child("images/stars.jpg");
-        storageRef.child("images/stars.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-                Glide.with(getActivity())
-                        .load(uri)
-                        .into(profilePic);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
+
 
 
         editPic = getView().findViewById(R.id.tvEditPic);
@@ -156,26 +145,22 @@ public class ProfilePageFragment extends Fragment {
          chats = getView().findViewById(R.id.tvChatsProfile);
          chats.setOnClickListener(new View.OnClickListener() {
              @Override
-             public void onClick(View view) {
-
+             public void onClick(View v) {
                  chats.setTextColor(Color.parseColor("#B54040"));
                  posts.setTextColor(Color.parseColor("#A3A3A3"));
 
                  FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                  ft.replace(R.id.relativeLayout2, new UsersFragment());
                  ft.commit();
-
              }
          });
-
     }
 
 
     private void loadUserDetails() {
         binding.tvProfileUsername.setText(preferenceManager.getString(Constants.KEY_NAME));
-   //     byte[] bytes = Base64.getDecoder().decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
-   //     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-    //   binding.ivProfilePic.setImageBitmap(bitmap);
+
+
     }
 
 
