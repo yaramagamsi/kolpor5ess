@@ -37,7 +37,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 /**
@@ -46,6 +48,9 @@ import java.util.UUID;
  * create an instance of this fragment.
  */
 public class ProductsFragments extends Fragment {
+
+
+    private static final int RESULT_LOAD_IMG = 23;
 
     private EditText etName, etPrice;
     private ImageView ivPhoto;
@@ -179,12 +184,13 @@ public class ProductsFragments extends Fragment {
     }
 
     private void startIntentSenderForResult(int requestCode, int resultCode, Intent data) throws IOException {
-         // super.onActivityResult(requestCode, resultCode, data);
+          super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             image = BitmapFactory.decodeStream(getActivity().getAssets().open(selectedImage.getPath()));
             ivPhoto.setImageURI(selectedImage);
             // TODO: upload image and save location string
+            UploadImageToFirebase();
         }
     }
 
@@ -213,6 +219,27 @@ public class ProductsFragments extends Fragment {
             }
         });
         return ref.getPath();
+    }
+
+
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                ivPhoto.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+
+        }else {
+            Toast.makeText(getActivity(), "You haven't picked Image",Toast.LENGTH_LONG).show();
+        }
     }
 
 

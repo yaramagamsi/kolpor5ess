@@ -129,7 +129,7 @@ public class UsersFragment extends Fragment {
 
     private void getData()
     {
-        db.getFire().collection("Users")
+        db.getFire().collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
