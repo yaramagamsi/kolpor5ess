@@ -42,6 +42,7 @@
             android:layout_marginTop="85dp"
             android:background="#2196F3"
             android:text="login"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />

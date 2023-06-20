@@ -35,6 +35,8 @@ public class ProductsListFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Product> productArrayList;
     MyAdapter myAdapter;
+
+    ArrayList<String> productListPath;
     FirebaseServices db;
     ProgressDialog progressDialog;
     private ProductsCallBack ucall;
@@ -107,7 +109,7 @@ public class ProductsListFragment extends Fragment {
         ucall = new ProductsCallBack() {
             @Override
             public void onCallback(ArrayList<Product> productsList) {
-                myAdapter = new MyAdapter(getActivity(), productArrayList, new ItemClickListener() {
+                myAdapter = new MyAdapter(getActivity(), productArrayList,productListPath ,new ItemClickListener() {
                     @Override
                     public void onItemClick(Product product) {
 
@@ -139,6 +141,7 @@ public class ProductsListFragment extends Fragment {
                                 Product product = document.toObject(Product.class);
                                 if (product.getCategory().equals(getActivity().getIntent().getStringExtra("category")))
                                     productArrayList.add(document.toObject(Product.class));
+                                productListPath.add(document.getId());
                             }
 
                             ucall.onCallback(productArrayList);

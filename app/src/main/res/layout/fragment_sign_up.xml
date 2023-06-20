@@ -16,7 +16,7 @@
             android:id="@+id/etEmailSignup"
             android:layout_width="217dp"
             android:layout_height="56dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="60dp"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
@@ -28,7 +28,7 @@
             android:id="@+id/etPasswordSignup"
             android:layout_width="213dp"
             android:layout_height="50dp"
-            android:layout_marginTop="296dp"
+            android:layout_marginTop="340dp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
@@ -37,14 +37,16 @@
 
         <EditText
             android:id="@+id/etConfirmPasswordSignup"
-            android:layout_width="218dp"
-            android:layout_height="62dp"
+            android:layout_width="220dp"
+            android:layout_height="78dp"
             android:layout_marginTop="34dp"
+            android:layout_marginBottom="220dp"
             android:ems="10"
             android:hint="Confirm Password"
             android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/etPasswordSignup"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordSignup" />
+            app:layout_constraintTop_toBottomOf="@+id/etNameSignup" />
 
         <Button
             android:id="@+id/btnSignupSignup"
@@ -55,6 +57,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etConfirmPasswordSignup" />
+
+        <EditText
+            android:id="@+id/etNameSignup"
+            android:layout_width="215dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="126dp"
+            android:layout_marginBottom="240dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/etConfirmPasswordSignup"
+            app:layout_constraintStart_toStartOf="@+id/etEmailSignup"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

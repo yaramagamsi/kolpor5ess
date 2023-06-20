@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  */
 public class SignUpFragment extends Fragment {
 
-    private EditText etEmail , etPassword, etConfirmPassword;
+    private EditText etName, etEmail , etPassword, etConfirmPassword;
     private Button btnSignup;
     private FirebaseServices fbs;
     // TODO: define firebaseservices property
@@ -88,6 +88,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void connectComponents() {
+        etName = getView().findViewById(R.id.etNameSignup);
         etEmail = getView().findViewById(R.id.etEmailSignup);
         etPassword = getView().findViewById(R.id.etPasswordSignup);
         etConfirmPassword = getView().findViewById(R.id.etConfirmPasswordSignup);
@@ -138,8 +139,8 @@ public class SignUpFragment extends Fragment {
 
         FirebaseServices fbs = FirebaseServices.getInstance();
         HashMap<String, Object> data = new HashMap<>();
-        data.put("first_name", "Yara");
-        data.put("last_name", "Magamsi");
+        data.put("name", etName);
+        data.put("email", etEmail);
         fbs.getFire().collection("users")
                 .add(data)
                 .addOnSuccessListener(documentReference -> {
