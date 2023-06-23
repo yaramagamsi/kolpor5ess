@@ -31,11 +31,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     FirebaseServices fbs;
     ArrayList<String> productListPath;
 
-    public MyAdapter(Context context, ArrayList<Product> productArrayList, ArrayList<String> productListPath , ItemClickListener itemClickListener) {
+    public MyAdapter(Context context, ArrayList<Product> productArrayList, ItemClickListener itemClickListener) {
         this.context = context;
         this.productArrayList = productArrayList;
         this.mItemListener = itemClickListener;
-        this.productListPath = productListPath;
+      //  this.productListPath = productListPath;
     }
 
     @NonNull
@@ -62,21 +62,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             mItemListener.onItemClick(productArrayList.get(position));
         } );
 
-        StorageReference storageRef = fbs.getStorage().getReference().child(product.getPhoto());
-        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context)
-                        .load(uri)
-                        .into(holder.image);
-            }
-
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
 
     }
 
@@ -84,6 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
+
         return productArrayList.size();
     }
 

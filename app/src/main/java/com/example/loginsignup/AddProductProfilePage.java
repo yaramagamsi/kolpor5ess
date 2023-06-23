@@ -131,7 +131,7 @@ public class AddProductProfilePage extends Fragment {
                     p = new Product(category, name, priceValue, "", imgLocation);
                 addProduct(p);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
+                ft.replace(R.id.FrameLayoutMain, new ProfilePageFragment());
                 ft.commit();
             }
 

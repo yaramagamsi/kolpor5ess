@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.loginsignup.Data.EditProfilePage;
 import com.example.loginsignup.Interface.ProductsCallBack;
 import com.example.loginsignup.databinding.FragmentProfilePageBinding;
 import com.example.loginsignup.utilities.Constants;
@@ -40,7 +41,7 @@ public class ProfilePageFragment extends Fragment {
 
     private TextView posts, chats,editPic, profileUsername;
     private RelativeLayout relativeL, relativeL2;
-    private ImageView profilePic;
+    private ImageView profilePic, back;
     private FirebaseServices fbs;
     private ProductsCallBack ucall;
     private FragmentProfilePageBinding binding;
@@ -99,10 +100,13 @@ public class ProfilePageFragment extends Fragment {
         super.onStart();
 
         connectComponents();
+      //  loadUserDetails();
 
     }
 
     private void connectComponents() {
+
+
 
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.relativeLayout2, new MyPosts());
@@ -113,6 +117,17 @@ public class ProfilePageFragment extends Fragment {
 
         profileUsername = getView().findViewById(R.id.tvProfileUsername);
 
+        back = getView().findViewById(R.id.ivBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
+                ft.commit();
+            }
+        });
+
         profilePic = getView().findViewById(R.id.ivProfilePic);
 
 
@@ -122,8 +137,9 @@ public class ProfilePageFragment extends Fragment {
         editPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 3);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new EditProfilePage());
+                ft.commit();
             }
         });
 

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.loginsignup.Adapters.UsersAdapter;
+import com.example.loginsignup.Classes.Product;
 import com.example.loginsignup.Interface.UsersCallBack;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -104,7 +105,7 @@ public class UsersFragment extends Fragment {
         ucall = new UsersCallBack() {
             @Override
             public void onCallback(ArrayList<com.example.loginsignup.Classes.User> usersList) {
-                usersAdapter = new UsersAdapter(userArrayList, new UsersAdapter.ItemClickListener() {
+                usersAdapter = new UsersAdapter(getActivity(),userArrayList, new UsersAdapter.ItemClickListener() {
 
                     @Override
                     public void onItemClickUser(com.example.loginsignup.Classes.User user) {
@@ -117,6 +118,13 @@ public class UsersFragment extends Fragment {
                     @Override
                     public void onItemClick(User user) {
 
+                    }
+
+                    @Override
+                    public void onItemClick(com.example.loginsignup.Classes.User user) {
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.FrameLayoutMain, new ChatBuy());
+                        ft.commit();
                     }
 
                 });
@@ -136,8 +144,9 @@ public class UsersFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                User user = document.toObject(User.class);
+                               com.example.loginsignup.Classes.User user = document.toObject(com.example.loginsignup.Classes.User.class);
                                     userArrayList.add(document.toObject(com.example.loginsignup.Classes.User.class));
+                                // productListPath.add(document.getId());
                             }
 
                             ucall.onCallback(userArrayList);

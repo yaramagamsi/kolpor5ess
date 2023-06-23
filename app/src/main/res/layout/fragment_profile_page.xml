@@ -76,7 +76,7 @@
                     android:layout_marginBottom="63dp"
                     android:background="#D4ECFF"
                     android:shadowColor="#138BEA"
-                    android:text="Edit Profile Pic"
+                    android:text="Edit Profile Page"
                     android:textColor="#000000"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/tvPostsProfile"
@@ -95,6 +95,14 @@
                     app:layout_constraintBottom_toTopOf="@+id/tvChatsProfile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="42dp"
+                    android:layout_height="31dp"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

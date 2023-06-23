@@ -184,13 +184,13 @@ public class ProductsFragments extends Fragment {
     }
 
     private void startIntentSenderForResult(int requestCode, int resultCode, Intent data) throws IOException {
-          super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             image = BitmapFactory.decodeStream(getActivity().getAssets().open(selectedImage.getPath()));
             ivPhoto.setImageURI(selectedImage);
             // TODO: upload image and save location string
-            UploadImageToFirebase();
+              UploadImageToFirebase();
         }
     }
 

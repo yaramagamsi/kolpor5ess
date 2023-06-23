@@ -1,5 +1,7 @@
 package com.example.loginsignup;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.loginsignup.Classes.Product;
+import com.example.loginsignup.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -98,11 +105,12 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                String name = etName.getText().toString();
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
                 String confirmPassword = etConfirmPassword.getText().toString();
 
-                if(email.trim().isEmpty() || password.trim().isEmpty() || confirmPassword.trim().isEmpty())
+                if(name.trim().isEmpty() || (email.trim().isEmpty() || password.trim().isEmpty() || confirmPassword.trim().isEmpty()))
                 {
                     Toast.makeText(getActivity(),"Some fields are missing!",Toast.LENGTH_SHORT).show();
                 }
@@ -115,12 +123,15 @@ public class SignUpFragment extends Fragment {
                     return;
                 }
 
+                User user;
+                user = new User("", name , "", email, "", "");
+
                 fbs.getAuth().createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    addDataToFirebase();
+                                    addUser(user);
                                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                     ft.replace(R.id.FrameLayoutMain, new HomePageFragment());
                                     ft.commit();
@@ -135,12 +146,14 @@ public class SignUpFragment extends Fragment {
         });
     }
 
-    private void addDataToFirebase(){
+   /* private void addDataToFirebase(){
 
-        FirebaseServices fbs = FirebaseServices.getInstance();
+
+      FirebaseServices fbs = FirebaseServices.getInstance();
         HashMap<String, Object> data = new HashMap<>();
         data.put("name", etName);
         data.put("email", etEmail);
+        User user = new User("");
         fbs.getFire().collection("users")
                 .add(data)
                 .addOnSuccessListener(documentReference -> {
@@ -149,5 +162,33 @@ public class SignUpFragment extends Fragment {
                 .addOnFailureListener(exception -> {
                     Toast.makeText(getActivity().getApplicationContext(),exception.getMessage(),Toast.LENGTH_SHORT).show();
                 });
+
+
     }
+
+    */
+
+
+   public void addUser(User user) {
+       fbs.getFire().collection("users")
+               .add(user)
+               .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                   @Override
+                   public void onSuccess(DocumentReference documentReference) {
+
+                       Log.d(TAG, "DocumentSnapshot added with ID:" + documentReference.getId());
+
+
+                   }
+               })
+               .addOnFailureListener(new OnFailureListener() {
+
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       Log.v(TAG, "Error adding document", e);
+
+                   }
+               });
+   }
+
 }

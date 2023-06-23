@@ -1,13 +1,25 @@
 package com.example.loginsignup.Data;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.example.loginsignup.AddProductProfilePage;
+import com.example.loginsignup.FirebaseServices;
+import com.example.loginsignup.HomePageFragment;
+import com.example.loginsignup.ProfilePageFragment;
 import com.example.loginsignup.R;
 
 /**
@@ -16,6 +28,15 @@ import com.example.loginsignup.R;
  * create an instance of this fragment.
  */
 public class EditProfilePage extends Fragment {
+
+   private TextView tvAddPost;
+    private ImageView addPost,backEditProfile;
+    private Bitmap image;
+    private Button btnAdd;
+    private Spinner spnCategory;
+    private FirebaseServices fbs;
+    ActivityResultLauncher<String> mTakePhoto;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,5 +83,34 @@ public class EditProfilePage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_edit_profile_page, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        connectComponents();
+    }
+
+    private void connectComponents() {
+
+        backEditProfile = getView().findViewById(R.id.ivBackEditProfile);
+        backEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new ProfilePageFragment());
+                ft.commit();
+            }
+        });
+
+        addPost = getView().findViewById(R.id.ivAddPost);
+        addPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FrameLayoutMain, new AddProductProfilePage());
+                ft.commit();
+            }
+        });
     }
 }

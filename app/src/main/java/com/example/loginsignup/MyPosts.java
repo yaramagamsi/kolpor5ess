@@ -108,7 +108,7 @@ public class MyPosts extends Fragment {
         ucall = new ProductsCallBack() {
             @Override
             public void onCallback(ArrayList<Product> productsList) {
-                myAdapter = new MyAdapter(getActivity(), productArrayList,productListPath, new MyAdapter.ItemClickListener() {
+                myAdapter = new MyAdapter(getActivity(), productArrayList, new MyAdapter.ItemClickListener() {
                     @Override
                     public void onItemClick(Product product) {
 
